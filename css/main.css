@@ -1,0 +1,303 @@
+/*@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');*/
+
+/*body {
+  font-family: 'Quicksand', sans-serif;
+}*/
+
+/*body,*/html {
+  height: 100vh;
+}
+/*  .container {
+    width: 50%;
+    /*max-width: 1000px;*/
+/*    margin: 0 auto;
+}*/
+
+* {
+  box-sizing: border-box;
+}
+
+/** Navbar SECTION **/
+.topnav {
+    background-color: #4e90ec;
+    overflow: hidden;
+}
+.topnav a {
+    float: left;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.topnav a:hover,
+.topnav a:focus {
+    background: #666666;
+    color: white;
+    text-decoration: none;
+}
+.topnav .icon {
+    display: none;
+}
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+@media screen and (max-width: 675px) {
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+@media screen and (max-width: 674px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive a.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+
+body {
+    font-family: Open Sans;
+}
+
+h1 {
+    text-align: center;
+}
+
+.title {
+    text-decoration: none;
+}
+
+#quiz {
+    text-indent: 10px;
+    display:none;
+}
+
+.button {
+    border:4px solid;
+    border-radius:5px;
+    width: 60px;
+    padding-left:5px;
+    padding-right: 5px;
+    position: relative;
+    float:right;
+    background-color: #DCDCDC;
+    color: black;
+    margin: 0 2px 0 2px;
+}
+
+.button.active {
+    background-color: #F8F8FF; /*ghost white*/
+    color: #525252; /*almost black*/
+}
+
+button {
+    position: relative;
+    float:right;
+}
+
+button:hover {
+  text-decoration: none;
+  color: white;
+}
+
+button a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+
+#container {
+    width:50%;
+    margin: 5% 20% 6% 23%;
+    padding: 0 10px 40px 10px;
+    /*background-color: #1E90FF;*/
+    border:4px solid #4e90ec;/*#B0E0E6;*/
+    border-radius:5px;
+    /*color: #FFFFFF;*/
+    font-weight: bold;
+    box-shadow: 5px 5px 5px #888;
+}
+
+#containerInner {
+    width:90%;
+    margin:auto;
+    /*padding: 0 25px 40px 10px;*/
+    padding: 10px;
+    /*background-color: #1E90FF;*/
+    border:2px solid white; /*grey*/
+    border-radius:5px;
+    /*color: #FFFFFF;*/
+    font-weight: bold;
+    /*box-shadow: 5px 5px 5px #888;*/
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#prev {
+    display:none;
+}
+
+#start {
+    display:none;
+    width: 150px;
+}
+
+/*mostly from articlesmain.html*/
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: center;
+  padding: 10px;
+}
+
+.col-1 { width: 8.33%; }
+.col-2 { width: 16.66%; }
+.col-3 { width: 25%; }
+.col-4 { width: 33.33%; }
+.col-5 { width: 41.66%; }
+.col-6 { width: 50%; }
+.col-7 { width: 58.33%; }
+.col-8 { width: 66.66%; }
+.col-9 { width: 75%; }
+.col-10 { width: 83.33%; }
+.col-11 { width: 91.66%; }
+.col-12 { width: 100%; }
+
+.header {
+  background-color: #4e90ec;
+  color: #ffffff;
+  padding: 15px;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  /*background-color: #4e90ec;*/
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.menu li:hover {
+  background-color: #4e90ec;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+/*names of article-writers in articlesmain.html*/
+.authorNameMain {
+  font-family: Georgia;
+  display: block;
+  font-weight: normal;
+}
+
+/*names of article-writers in articles*/
+.authorName {
+  font-family: Georgia;
+  font-style: italic;
+  font-size: 16px;
+  display: block;
+  font-weight: lighter;
+}
+
+/*signature initials author in articles*/
+.authorInitials {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.articleHeading {
+  font-weight: bolder;
+  font-size: 24px;
+}
+
+/*from mostly articles*/
+.containerParagraph {
+  width:60%;
+  margin: 10% 20% 10% 20%;
+  padding: 0 10px 40px 10px;
+  /*background-color: #1E90FF;*/
+  border:4px solid #4e90ec;/*#B0E0E6;*/
+  border-radius:5px;
+  /*color: #FFFFFF;*/
+  font-weight: bold;
+  box-shadow: 5px 5px 5px #888;
+}
+
+.grammarSentence {
+  border: grey solid 3px;
+  margin: 5px 2px;
+  padding: 18px;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #ffffcc;
+}
+
+p {
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+/*button for previous, next, etc. after articles*/
+.buttons-coll {
+  width: 90%;
+  margin: 50px auto;
+  text-align: center;
+}
+button {
+  margin: 20px;
+}
+.custom-btn {
+  padding: 10px 25px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  background: transparent;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+/**** BTN No. 1 ****/
+.btn-1 {
+  border: 2px solid #000;
+}
+.btn-1:hover {
+  background: #000;
+  color: #fff;
+}
+.btn-1:active {
+  top: 2px;
+}
