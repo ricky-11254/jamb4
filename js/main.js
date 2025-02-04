@@ -223,7 +223,7 @@ $(document).on("click", 'a[href^="#"]', function (event) {
                 <html>
                 <head>
                     <title>Quiz Results</title>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
                     <style>
                         body { 
                             font-family: Arial, sans-serif; 
