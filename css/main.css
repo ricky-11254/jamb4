@@ -1,19 +1,6 @@
-#question {
-    margin-left: 0px;
-}
-#question p {
-    margin-left: 0px;
-}
-#question h2 {
-    margin-left: 0px;
-}
-#question label {
-    margin-left: 0px;
-}
 #quiz {
     text-align: left;
 }
-
 #quiz h2,
 #quiz p,
 #quiz label,
@@ -29,4 +16,38 @@ padding: 0;
 
 #quiz li {
 margin-bottom: 10px;
+}
+
+
+.button {
+  border: 4px solid;
+  border-radius: 5px;
+  width: 60px;
+  padding-left: 5px;
+  padding-right: 5px;
+  position: relative;
+  float: right;
+  background-color: #dcdcdc;
+  color: black;
+  margin: 0 2px 0 2px;
+}
+
+.button.active {
+  background-color: #f8f8ff; /*ghost white*/
+  color: #525252; /*almost black*/
+}
+
+button {
+  position: relative;
+  float: right;
+}
+
+button:hover {
+  text-decoration: none;
+  color: white;
+}
+
+button a:hover {
+  text-decoration: none;
+  color: white;
 }
