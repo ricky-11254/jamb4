@@ -64,18 +64,18 @@ $(document).on("click", 'a[href^="#"]', function (event) {
 	});
 
 	// Click handler for the 'Start Over' button
-    // TODO - Need to comment this out to remove the start over button
-	$("#start").on("click", function (e) {
-		e.preventDefault();
-
-		if (quiz.is(":animated")) {
-			return false;
-		}
-		questionCounter = 0;
-		selections = [];
-		displayNext();
-		$("#start").hide();
-	});
+    // DONE - Need to comment this out to remove the start over button
+    //	$("#start").on("click", function (e) {
+    //		e.preventDefault();
+    //
+    //		if (quiz.is(":animated")) {
+    //			return false;
+    //		}
+    //		questionCounter = 0;
+    //		selections = [];
+    //		displayNext();
+    //		$("#start").hide();
+    //	});
 
 	// Animates buttons on hover
 	$(".button").on("mouseenter", function () {
@@ -191,7 +191,7 @@ $(document).on("click", 'a[href^="#"]', function (event) {
 				quiz.append(scoreElem).fadeIn();
 				$("#next").hide();
 				$("#prev").hide();
-				$("#start").show();
+				//$("#start").show();
 			}
 		});
 	}
