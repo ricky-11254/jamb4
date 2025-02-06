@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-	const modal = document.getElementById("myModal");
+	const modal = document.getElementById("quizModal");
 	const agreeButton = document.getElementById("agreeButton");
 
 	agreeButton.addEventListener("click", () => {
