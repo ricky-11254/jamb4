@@ -10,3 +10,23 @@
 #question label {
     margin-left: 0px;
 }
+#quiz {
+    text-align: left;
+}
+
+#quiz h2,
+#quiz p,
+#quiz label,
+#quiz input[type="radio"] {
+text-align: left;
+display: block;
+}
+
+#quiz ul {
+list-style-type: none;
+padding: 0;
+}
+
+#quiz li {
+margin-bottom: 10px;
+}
