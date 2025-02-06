@@ -1,6 +1,7 @@
 #quiz {
     text-align: left;
     font-size: 18px; /* Adjust the size as needed */
+    font-weight: bold;
 }
 
 #quiz h2,
