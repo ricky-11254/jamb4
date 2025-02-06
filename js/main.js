@@ -64,6 +64,7 @@ $(document).on("click", 'a[href^="#"]', function (event) {
 	});
 
 	// Click handler for the 'Start Over' button
+    // TODO - Need to comment this out to remove the start over button
 	$("#start").on("click", function (e) {
 		e.preventDefault();
 
@@ -224,6 +225,7 @@ $(document).on("click", 'a[href^="#"]', function (event) {
                 <head>
                     <title>Quiz Results</title>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
                     <style>
                         body { 
                             font-family: Arial, sans-serif; 
@@ -355,6 +357,11 @@ $(document).on("click", 'a[href^="#"]', function (event) {
 
                         // Generate PDF from the body content
                         html2pdf().set(opt).from(document.body).save().then(function() {
+                            console.log("PDF generated successfully");
+                            // Show the button again after PDF is generated
+                            btn.style.display = 'block';
+                        }).catch(function(error) {
+                            console.error("Error generating PDF: ", error);
                             // Show the button again after PDF is generated
                             btn.style.display = 'block';
                         });
