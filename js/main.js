@@ -212,183 +212,182 @@ $(document).on("click", 'a[href^="#"]', function (event) {
 
     // Computes score and returns a paragraph element to be displayed
     function displayScore() {
-      // Move results generation INSIDE this function
-        function generateResultsPage() {
-            // Calculate score
-            const score = getScore();
-            const totalQuestions = questions.length;
+      function generateResultsPage() {
+        const score = getScore();
+        const totalQuestions = questions.length;
 
-            // Start building HTML content
-            let html = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Quiz Results</title>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-                    <style>
-                        body { 
-                            font-family: Arial, sans-serif; 
-                            max-width: 800px; 
-                            margin: 0 auto; 
-                            padding: 20px; 
-                        }
-                        .question { 
-                            margin-bottom: 30px; 
-                            border: 1px solid #ddd; 
-                            padding: 15px; 
-                            border-radius: 5px; 
-                        }
-                        .choice {
-                            padding: 10px;
-                            margin: 5px 0;
-                            border-radius: 5px;
-                        }
-                        .correct {
-                            background-color: #d4edda;
-                            border: 2px solid #28a745;
-                        }
-                        .incorrect {
-                            background-color: #f8d7da;
-                            border: 2px solid #dc3545;
-                        }
-                        .explanation {
-                            background-color: #f8f9fa;
-                            border: 1px solid #e2e6ea;
-                            padding: 10px;
-                            margin-top: 10px;
-                        }
-                        .score {
-                            text-align: center;
-                            font-size: 24px;
-                            margin-bottom: 20px;
-                        }
-                        .question-image {
-                            max-width: 100%;
-                            height: auto;
-                            display: block;
-                            margin: 10px 0;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="score">
-                        You scored ${score} out of ${totalQuestions}
+        // Create results container
+        const container = document.createElement('div');
+        container.className = 'results-container';
+        
+        // Add styles
+        const styles = document.createElement('style');
+        styles.textContent = `
+          .results-container {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          .score-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+          }
+          .question-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+          }
+          .choice {
+            padding: 10px;
+            margin: 5px 0;
+          }
+          .correct {
+            background-color: #d4edda;
+            border: 1px solid #28a745;
+          }
+          .user-correct {
+            background-color: #d4edda;
+            border: 2px solid #28a745;
+          }
+          .user-incorrect {
+            background-color: #f8d7da;
+            border: 2px solid #dc3545;
+          }
+          .explanation {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+          }
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        `;
+        document.head.appendChild(styles);
+
+        // Create content HTML
+        const content = `
+          <div class="score-header">
+            <h1>Quiz Results</h1>
+            <p style="font-size: 24px;">Score: ${score} out of ${totalQuestions}</p>
+          </div>
+          
+          <div class="questions-review">
+            ${questions.map((question, index) => {
+              const userAnswer = selections[index];
+              const isCorrect = userAnswer === question.correctAnswer;
+              
+              return `
+                <div class="question-section">
+                  <h3>Question ${index + 1}</h3>
+                  ${question.qType ? `<p style="color: #666;">${question.qType}</p>` : ''}
+                  <p style="font-weight: 500;">${question.question}</p>
+                  
+                  ${question.image ? `
+                    <div style="margin: 10px 0;">
+                      <img src="https://ricky-11254.github.io/jamb4/${question.image}" 
+                           alt="Question ${index + 1} Image">
                     </div>
-            `;
-
-            // Generate results for each question
-            questions.forEach((question, index) => {
-                const userAnswer = selections[index];
-                const isCorrect = userAnswer === question.correctAnswer;
-
-                // Start question div
-                html += `
-                    <div class="question">
-                        <h3>Question ${index + 1}: ${question.qType || 'Question'}</h3>
-                        <p>${question.question}</p>
-                `;
-
-                // Add image if exists
-                if (question.image) {
-                    html += `<img src="https://ricky-11254.github.io/jamb4/${question.image}" alt="Question Image" class="question-image">`;
-                }
-
-                // Add audio if exists
-                if (question.audio) {
-                    html += `
-                        <audio controls>
-                            <source src="https://ricky-11254.github.io/jamb4/audio/${question.audio}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    `;
-                }
-
-                // Generate choices
-                html += `<div class="choices">`;
-                question.choices.forEach((choice, choiceIndex) => {
-                    let choiceClass = '';
-                    if (choiceIndex === question.correctAnswer) {
-                        choiceClass = 'correct'; // Always highlight correct answer in green
-                    }
-                    if (choiceIndex === userAnswer) {
-                        choiceClass += isCorrect ? ' correct' : ' incorrect';
-                    }
-
-                    html += `
-                        <div class="choice ${choiceClass}">
-                            ${choice}
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-
-                // Add explanation if the answer was incorrect
-                if (!isCorrect && question.explanation) {
-                    html += `
-                        <div class="explanation">
-                            <strong>Explanation:</strong> ${question.explanation}
-                        </div>
-                    `;
-                }
-
-                html += `</div>`; // Close question div
-            });
-
-            // Close HTML
-            html += `
-                <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="downloadResults()" class="download-btn">Download Results</button>
+                  ` : ''}
+                  
+                  ${question.audio ? `
+                    <div style="margin: 10px 0;">
+                      <audio controls>
+                        <source src="https://ricky-11254.github.io/jamb4/audio/${question.audio}" 
+                                type="audio/mpeg">
+                      </audio>
+                    </div>
+                  ` : ''}
+                  
+                  <div class="choices-section">
+                    ${question.choices.map((choice, choiceIndex) => `
+                      <div class="choice ${choiceIndex === question.correctAnswer ? 'correct' : ''} 
+                                      ${choiceIndex === userAnswer ? (isCorrect ? 'user-correct' : 'user-incorrect') : ''}">
+                        ${choice}
+                      </div>
+                    `).join('')}
+                  </div>
+                  
+                  ${!isCorrect && question.explanation ? `
+                    <div class="explanation">
+                      <strong>Explanation:</strong> ${question.explanation}
+                    </div>
+                  ` : ''}
                 </div>
-                <script>
-                    function downloadResults() {
-                        // Remove the download button temporarily
-                        const btn = document.querySelector('.download-btn');
-                        btn.style.display = 'none';
-                        
-                        // PDF options
-                        const opt = {
-                            margin: 1,
-                            filename: 'quiz-results.pdf',
-                            image: { type: 'jpeg', quality: 0.98 },
-                            html2canvas: { scale: 2 },
-                            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-                        };
+              `;
+            }).join('')}
+          </div>
+        `;
 
-                        // Generate PDF from the body content
-                        html2pdf().set(opt).from(document.body).save().then(function() {
-                            console.log("PDF generated successfully");
-                            // Show the button again after PDF is generated
-                            btn.style.display = 'block';
-                        }).catch(function(error) {
-                            console.error("Error generating PDF: ", error);
-                            // Show the button again after PDF is generated
-                            btn.style.display = 'block';
-                        });
-                    }
-                </script>
-                </body>
-                </html>
-            `;
+        // Create temporary container and add content
+        const tempContainer = document.createElement('div');
+        tempContainer.innerHTML = content;
+        document.body.appendChild(tempContainer);
 
-            // Open results in a new window
-            const resultsWindow = window.open('', '_blank');
-            resultsWindow.document.write(html);
-            resultsWindow.document.close();
+        // Initialize jsPDF with slightly larger page size for better content fit
+        const pdf = new jsPDF('p', 'pt', 'a4');
+        
+        // PDF generation settings
+        const options = {
+          margin: [40, 40, 40, 40],
+          html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false
+          },
+          jsPDF: {
+            unit: 'pt',
+            format: 'a4',
+            orientation: 'portrait'
+          }
+        };
+
+        // Generate PDF
+        html2pdf().from(tempContainer).set(options).save('quiz-results.pdf').then(() => {
+          // Clean up temporary elements
+          document.body.removeChild(tempContainer);
+          document.head.removeChild(styles);
+        });
+      }
+
+      // Create download button
+      const downloadButton = $("<button>", {
+        text: "Download Results",
+        class: "download-button",
+        css: {
+          display: "block",
+          margin: "20px auto",
+          padding: "10px 20px",
+          fontSize: "16px",
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer"
+        },
+        click: function(e) {
+          e.preventDefault();
+          generateResultsPage();
         }
+      });
 
-       // Call results generation
-       generateResultsPage();
-    
-       // Create and return score element
-       const scoreElem = $("<p>", { id: "question" });
-       scoreElem.append(
-           "You got " +
-           getScore() +
-           " questions out of " +
-           questions.length +
-           " right."
-       );
-       return scoreElem;
+      // Create score element
+      const scoreElem = $("<div>", { id: "question" }).append(
+        $("<p>", {
+          text: `You got ${getScore()} questions out of ${questions.length} right.`,
+          css: {
+            fontSize: "20px",
+            textAlign: "center",
+            marginBottom: "20px"
+          }
+        }),
+        downloadButton
+      );
+
+      return scoreElem;
     }
     /*
     window.onload = function () {
