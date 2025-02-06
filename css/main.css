@@ -1,53 +1,59 @@
 #quiz {
     text-align: left;
+    font-size: 18px; /* Adjust the size as needed */
 }
+
 #quiz h2,
 #quiz p,
 #quiz label,
 #quiz input[type="radio"] {
-text-align: left;
-display: block;
+    text-align: left;
+}
+
+#quiz label,
+#quiz input[type="radio"] {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 #quiz ul {
-list-style-type: none;
-padding: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 #quiz li {
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-
 .button {
-  border: 4px solid;
-  border-radius: 5px;
-  width: 60px;
-  padding-left: 5px;
-  padding-right: 5px;
-  position: relative;
-  float: right;
-  background-color: #dcdcdc;
-  color: black;
-  margin: 0 2px 0 2px;
+    border: 4px solid;
+    border-radius: 5px;
+    width: 60px;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+    float: right;
+    background-color: #dcdcdc;
+    color: black;
+    margin: 0 2px 0 2px;
 }
 
 .button.active {
-  background-color: #f8f8ff; /*ghost white*/
-  color: #525252; /*almost black*/
+    background-color: #f8f8ff; /*ghost white*/
+    color: #525252; /*almost black*/
 }
 
 button {
-  position: relative;
-  float: right;
+    position: relative;
+    float: right;
 }
 
 button:hover {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 
 button a:hover {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
