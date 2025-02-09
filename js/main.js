@@ -166,12 +166,37 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 };
                 let html = `
                     <!DOCTYPE html>
-                    <html>
+                    <html lang="en">
                     <head>
-                        <title>Quiz Results</title>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
                         <style>
-                            body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+                            .container {
+                                position: fixed;
+                                top: 20%;
+                                left: 28%;
+                                margin-top: -65px;
+                                margin-left: -100px;
+                                border-radius: 7px;
+                            }
+                            .card {
+                                box-sizing: content-box;
+                                width: 700px;
+                                padding: 30px;
+                                border: 1px solid black;
+                                font-style: sans-serif;
+                                background-color: #f0f0f0;
+                            }
+                            #button {
+                                background-color: #4caf50;
+                                border-radius: 5px;
+                                margin-left: 650px;
+                                margin-bottom: 5px;
+                                color: white;
+                            }
+                            h2 {
+                                text-align: center;
+                                color: #24650b;
+                            }
                             .question { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
                             .choice { padding: 10px; margin: 5px 0; border-radius: 5px; }
                             .correct { background-color: #d4edda; border: 2px solid #28a745; }
@@ -182,7 +207,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         </style>
                     </head>
                     <body>
-                        <div class="score">You scored ${score} out of ${totalQuestions}</div>
+                        <div class="container">
+                            <button id="button">Generate PDF</button>
+                            <div class="card" id="makepdf">
+                                <h2>Quiz Results</h2>
+                                <div class="score">You scored ${score} out of ${totalQuestions}</div>
                 `;
                 questions.forEach((question, index) => {
                     const userAnswer = selections[index];
@@ -221,23 +250,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     html += `</div>`;
                 });
                 html += `
-                    <div style="text-align: center; margin-top: 20px;">
-                        <button onclick="downloadResults()" class="download-btn">Download Results</button>
-                    </div>
-                    <script>
-                        function downloadResults() {
-                            console.log("Download button clicked");
-                            const btn = document.querySelector('.download-btn');
-                            btn.style.display = 'none';
-                            html2pdf().set(${JSON.stringify(opt)}).from(document.body).save().then(function() {
-                                console.log("PDF generated successfully");
-                                btn.style.display = 'block';
-                            }).catch(function(error) {
-                                console.error("Error generating PDF:", error);
-                                btn.style.display = 'block';
+                            </div>
+                        </div>
+                        <script>
+                            let button = document.getElementById("button");
+                            let makepdf = document.getElementById("makepdf");
+
+                            button.addEventListener("click", function () {
+                                html2pdf().set(${JSON.stringify(opt)}).from(makepdf).save();
                             });
-                        }
-                    </script>
+                        </script>
                     </body>
                     </html>
                 `;
