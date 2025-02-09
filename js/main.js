@@ -153,141 +153,142 @@ document.addEventListener("DOMContentLoaded", (event) => {
 		}
 
 		function displayScore() {
-	      function generateResultsPage() {
-              // Calculate score
-              const score = getScore();
-              const totalQuestions = questions.length;
-        
-              // Start building HTML content
-              let html = `
-                  <!DOCTYPE html>
-                  <html>
-                  <head>
-                      <title>Quiz Results</title>
-                      <style>
-                          body { 
-                              font-family: Arial, sans-serif; 
-                              max-width: 800px; 
-                              margin: 0 auto; 
-                              padding: 20px; 
-                          }
-                          .question { 
-                              margin-bottom: 30px; 
-                              border: 1px solid #ddd; 
-                              padding: 15px; 
-                              border-radius: 5px; 
-                          }
-                          .choice {
-                              padding: 10px;
-                              margin: 5px 0;
-                              border-radius: 5px;
-                          }
-                          .correct {
-                              background-color: #d4edda;
-                              border: 2px solid #28a745;
-                          }
-                          .incorrect {
-                              background-color: #f8d7da;
-                              border: 2px solid #dc3545;
-                          }
-                          .explanation {
-                              background-color: #f8f9fa;
-                              border: 1px solid #e2e6ea;
-                              padding: 10px;
-                              margin-top: 10px;
-                          }
-                          .score {
-                              text-align: center;
-                              font-size: 24px;
-                              margin-bottom: 20px;
-                          }
-                          .question-image {
-                              max-width: 100%;
-                              height: auto;
-                              display: block;
-                              margin: 10px 0;
-                          }
-                      </style>
-                  </head>
-                  <body>
-                      <div class="score">
-                          You scored ${score} out of ${totalQuestions}
-                      </div>
-              `;
-        
-              // Generate results for each question
-              questions.forEach((question, index) => {
-                  const userAnswer = selections[index];
-                  const isCorrect = userAnswer === question.correctAnswer;
-        
-                  // Start question div
-                  html += `
-                      <div class="question">
-                          <h3>Question ${index + 1}: ${question.qType || 'Question'}</h3>
-                          <p>${question.question}</p>
-                  `;
-        
-                  // Add image if exists
-                  if (question.image) {
-                      html += `<img src="https://ricky-11254.github.io/jamb4/${question.image}" alt="Question Image" class="question-image">`;
-                  }
-        
-                  // Add audio if exists
-                  if (question.audio) {
-                      html += `
-                          <audio controls>
-                              <source src="https://ricky-11254.github.io/jamb4/audio/${question.audio}" type="audio/mpeg">
-                              Your browser does not support the audio element.
-                          </audio>
-                      `;
-                  }
-        
-                  // Generate choices
-                  html += `<div class="choices">`;
-                  question.choices.forEach((choice, choiceIndex) => {
-                      let choiceClass = '';
-                      if (choiceIndex === question.correctAnswer) {
-                          choiceClass = 'correct'; // Always highlight correct answer in green
-                      }
-                      if (choiceIndex === userAnswer) {
-                          choiceClass += isCorrect ? ' correct' : ' incorrect';
-                      }
-        
-                      html += `
-                          <div class="choice ${choiceClass}">
-                              ${choice}
-                          </div>
-                      `;
-                  });
-                  html += `</div>`;
-        
-                  // Add explanation if the answer was incorrect
-                  if (!isCorrect && question.explanation) {
-                      html += `
-                          <div class="explanation">
-                              <strong>Explanation:</strong> ${question.explanation}
-                          </div>
-                      `;
-                  }
-        
-                  html += `</div>`; // Close question div
-              });
-        
-              // Close HTML
-              html += `
-                  <div style="text-align: center; margin-top: 20px;">
-                      <button onclick="window.print()">Download Results</button>
-                  </div>
-                  </body>
-                  </html>
-              `;
-        
-              // Open results in a new window
-              const resultsWindow = window.open('', '_blank');
-              resultsWindow.document.write(html);
-              resultsWindow.document.close();
-          }
-       // Call results generation
+            function generateResultsPage() {
+                // Calculate score
+                const score = getScore();
+                const totalQuestions = questions.length;
+
+                // Start building HTML content
+                let html = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Quiz Results</title>
+                        <style>
+                            body { 
+                                font-family: Arial, sans-serif; 
+                                max-width: 800px; 
+                                margin: 0 auto; 
+                                padding: 20px; 
+                            }
+                            .question { 
+                                margin-bottom: 30px; 
+                                border: 1px solid #ddd; 
+                                padding: 15px; 
+                                border-radius: 5px; 
+                                page-break-after: always; /* Add page break after each question */
+                            }
+                            .choice {
+                                padding: 10px;
+                                margin: 5px 0;
+                                border-radius: 5px;
+                            }
+                            .correct {
+                                background-color: #d4edda;
+                                border: 2px solid #28a745;
+                            }
+                            .incorrect {
+                                background-color: #f8d7da;
+                                border: 2px solid #dc3545;
+                            }
+                            .explanation {
+                                background-color: #f8f9fa;
+                                border: 1px solid #e2e6ea;
+                                padding: 10px;
+                                margin-top: 10px;
+                            }
+                            .score {
+                                text-align: center;
+                                font-size: 24px;
+                                margin-bottom: 20px;
+                            }
+                            .question-image {
+                                max-width: 100%;
+                                height: auto;
+                                display: block;
+                                margin: 10px 0;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="score">
+                            You scored ${score} out of ${totalQuestions}
+                        </div>
+                `;
+
+                // Generate results for each question
+                questions.forEach((question, index) => {
+                    const userAnswer = selections[index];
+                    const isCorrect = userAnswer === question.correctAnswer;
+
+                    // Start question div
+                    html += `
+                        <div class="question">
+                            <h3>Question ${index + 1}: ${question.qType || 'Question'}</h3>
+                            <p>${question.question}</p>
+                    `;
+
+                    // Add image if exists
+                    if (question.image) {
+                        html += `<img src="https://ricky-11254.github.io/jamb4/${question.image}" alt="Question Image" class="question-image">`;
+                    }
+
+                    // Add audio if exists
+                    if (question.audio) {
+                        html += `
+                            <audio controls>
+                                <source src="https://ricky-11254.github.io/jamb4/audio/${question.audio}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        `;
+                    }
+
+                    // Generate choices
+                    html += `<div class="choices">`;
+                    question.choices.forEach((choice, choiceIndex) => {
+                        let choiceClass = '';
+                        if (choiceIndex === question.correctAnswer) {
+                            choiceClass = 'correct'; // Always highlight correct answer in green
+                        }
+                        if (choiceIndex === userAnswer) {
+                            choiceClass += isCorrect ? ' correct' : ' incorrect';
+                        }
+
+                        html += `
+                            <div class="choice ${choiceClass}">
+                                ${choice}
+                            </div>
+                        `;
+                    });
+                    html += `</div>`;
+
+                    // Add explanation if the answer was incorrect
+                    if (!isCorrect && question.explanation) {
+                        html += `
+                            <div class="explanation">
+                                <strong>Explanation:</strong> ${question.explanation}
+                            </div>
+                        `;
+                    }
+
+                    html += `</div>`; // Close question div
+                });
+
+                // Close HTML
+                html += `
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button onclick="window.print()">Download Results</button>
+                    </div>
+                    </body>
+                    </html>
+                `;
+
+                // Open results in a new window
+                const resultsWindow = window.open('', '_blank');
+                resultsWindow.document.write(html);
+                resultsWindow.document.close();
+            }
+            // Call results generation
 
 			generateResultsPage();
 			const scoreElem = $("<p>", { id: "question" });
