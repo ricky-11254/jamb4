@@ -61,49 +61,28 @@
     margin-bottom: 10px;
 }
 
-.button {
-    border: 2px solid #007BFF; /* Blue border */
-    border-radius: 5px;
-    width: 80px;
-    padding: 10px 20px;
-    background-color: #007BFF; /* Blue background */
-    color: black; /* Black text */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-    text-align: center;
-    margin: 0 5px;
-}
-
-.button.active {
-    background-color: #0056b3; /* Darker blue for active state */
-    color: black; /* Black text */
-}
-
-button {
-    position: relative;
+#prev {
     float: right;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
 }
 
-button:hover {
-    text-decoration: none;
-    color: black; /* Keep text black on hover */
+#next {
+    float: right;
 }
 
-button a:hover {
-    text-decoration: none;
-    color: black; /* Keep text black on hover */
+.button {
+    border: 2px solid #1336b2; /* Updated border color */
+    background-color: #1336b2; /* Updated background color */
+    color: white; /* Updated text color */
+    text-decoration: none; /* Remove underline */
 }
 
 .button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #102d91; /* Darker blue on hover */
+    text-decoration: none; /* Remove underline on hover */
 }
 
 .button:active {
-    background-color: #004085; /* Even darker blue on click */
+    background-color: #0d2473; /* Even darker blue on click */
     transform: scale(0.98); /* Slightly shrink on click */
+    text-decoration: none; /* Remove underline on click */
 }
