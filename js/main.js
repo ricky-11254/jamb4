@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 					<html>
 					<head>
 						<title>Quiz Results</title>
-						<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 						<style>
 							body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
 							.question { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
@@ -220,12 +220,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 						function downloadResults() {
 							const btn = document.querySelector('.download-btn');
 							btn.style.display = 'none';
+                            const formattedDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
 							const opt = {
-								margin: 1,
-								filename: 'quiz-results.pdf',
-								image: { type: 'jpeg', quality: 0.98 },
-								html2canvas: { scale: 2 },
-								jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+								margin: 10,
+								filename: 'QuizResults_' + formattedDate + '.pdf',
+								image: { type: 'jpeg', quality: 1.0 },
+								html2canvas: { scale: 4 },
+								jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 							};
 							html2pdf().set(opt).from(document.body).save().then(function() {
 								btn.style.display = 'block';
