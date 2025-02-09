@@ -62,13 +62,15 @@
 }
 
 #prev {
-    float: left;
     margin-right: 10px;
 }
 
 #next {
-    float: right;
     margin-left: 10px;
+}
+
+#prev, #next {
+    display: inline-block;
 }
 
 .button {
