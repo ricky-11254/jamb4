@@ -218,6 +218,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 					</div>
 					<script>
 						function downloadResults() {
+                            console.log("Download button clicked");
 							const btn = document.querySelector('.download-btn');
 							btn.style.display = 'none';
                             const formattedDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
@@ -229,8 +230,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 								jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
 							};
 							html2pdf().set(opt).from(document.body).save().then(function() {
+                                console.log("PDF generated successfully");
 								btn.style.display = 'block';
 							}).catch(function(error) {
+                                console.error("Error generating PDF:", error);
 								btn.style.display = 'block';
 							});
 						}
