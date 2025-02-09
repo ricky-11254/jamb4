@@ -63,10 +63,12 @@
 
 #prev {
     float: right;
+    margin-right: 10px;
 }
 
 #next {
     float: right;
+    margin-left: 10px;
 }
 
 .button {
@@ -96,3 +98,8 @@
     transform: scale(0.98); /* Slightly shrink on click */
     text-decoration: none; /* Remove underline on click */
 }
+.button:a {
+    color: white;
+    text-decoration: none;
+}
+
