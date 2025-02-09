@@ -208,6 +208,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                 display: block;
                                 margin: 10px 0;
                             }
+                            @media print {
+                                .no-print {
+                                    display: none;
+                                }
+                            }
                         </style>
                     </head>
                     <body>
@@ -276,7 +281,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 // Close HTML
                 html += `
-                    <div style="text-align: center; margin-top: 20px;">
+                    <div style="text-align: center; margin-top: 20px;" class="no-print">
                         <button onclick="window.print()">Download Results</button>
                     </div>
                     </body>
@@ -287,7 +292,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const resultsWindow = window.open('', '_blank');
                 resultsWindow.document.write(html);
                 resultsWindow.document.close();
-            }
+            } 
             // Call results generation
 
 			generateResultsPage();
