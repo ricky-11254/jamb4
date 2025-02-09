@@ -266,15 +266,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 resultsWindow.document.write(html);
                 resultsWindow.document.close();
 
-                // Dynamically load the html2pdf script
                 const script = resultsWindow.document.createElement('script');
                 script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
                 script.onload = function() {
                     resultsWindow.document.getElementById("button").addEventListener("click", function () {
-                        html2pdf().set(${JSON.stringify(opt)}).from(resultsWindow.document.getElementById("makepdf")).save();
+                        html2pdf().set(opt).from(resultsWindow.document.getElementById("makepdf")).save();
                     });
                 };
-                resultsWindow.document.head.appendChild(script);
+                resultsWindow.document.head.appendChild(script); 
             }	
 			generateResultsPage();
 			const scoreElem = $("<p>", { id: "question" });
