@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 		}
 
 		function displayScore() {
-			function generateResultsPage() {
+            function generateResultsPage() {
                 const score = getScore();
                 const totalQuestions = questions.length;
                 const formattedDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
@@ -168,7 +168,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     <!DOCTYPE html>
                     <html lang="en">
                     <head>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
                         <style>
                             .container {
                                 position: fixed;
@@ -266,7 +265,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 const resultsWindow = window.open('', '_blank');
                 resultsWindow.document.write(html);
                 resultsWindow.document.close();
-            }
+
+                // Dynamically load the html2pdf script
+                const script = resultsWindow.document.createElement('script');
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+                script.onload = function() {
+                    resultsWindow.document.getElementById("button").addEventListener("click", function () {
+                        html2pdf().set(${JSON.stringify(opt)}).from(resultsWindow.document.getElementById("makepdf")).save();
+                    });
+                };
+                resultsWindow.document.head.appendChild(script);
+            }	
 			generateResultsPage();
 			const scoreElem = $("<p>", { id: "question" });
 			scoreElem.append("You got " + getScore() + " questions out of " + questions.length + " right.");
